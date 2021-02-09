@@ -4,6 +4,8 @@ import Searchbar from './Searchbar'
 import ImageGallery from './ImageGallery'
 import Layout from './Layout'
 import Modal from './Modal'
+import Loader from "react-loader-spinner";
+import '../styles.css'
 
 
 class App extends Component {
@@ -37,6 +39,7 @@ class App extends Component {
             })))
             .catch(error => this.setState({ error }))
             .finally(() => this.setState({ loading: false }));
+        
     }
 
     handleSearchFormSubmit = query => {
@@ -46,13 +49,30 @@ class App extends Component {
             articles: [],
         })
     }
+
+
     render() {
-        const { articles, showModal } = this.state;
+        const { articles, showModal, loading } = this.state;
         return (
             <Layout>
                 <Searchbar onSubmit={this.handleSearchFormSubmit} />
                 {articles.length > 0 && <ImageGallery images={articles} openModal={this.toggleModal}/>}
-                {showModal && <Modal onClose={this.toggleModal} largeUrl={ this.state.largeUrl}/>}
+                {showModal && <Modal onClose={this.toggleModal} largeUrl={this.state.largeUrl} />}
+                {loading && <Loader
+                    className='Loader'
+                    type="ThreeDots"
+                    color="#00BFFF"
+                    margin-left={100}
+                    height={80}
+                    width={80}
+                    timeout={3000} //3 secs
+                />}
+                
+                {articles.length > 0 && !loading && (
+                    <button type='button' className='Button' onClick={this.fetchImages}>
+                        Load more
+                    </button>
+                )}
             </Layout>
         )
     }
