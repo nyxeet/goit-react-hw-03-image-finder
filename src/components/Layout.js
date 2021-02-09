@@ -1,7 +1,7 @@
 import React from 'react';
 
 const styles = {
-  maxWidth: 1170,
+  maxWidth: 1920,
   marginLeft: 'auto',
   marginRight: 'auto',
   paddingRight: 12,
