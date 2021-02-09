@@ -3,6 +3,7 @@ import imagesApi from '../api/imagesApi'
 import Searchbar from './Searchbar'
 import ImageGallery from './ImageGallery'
 import Layout from './Layout'
+import Modal from './Modal'
 
 
 class App extends Component {
@@ -11,13 +12,19 @@ class App extends Component {
         loading: false,
         searchQuery: '',
         page: 1,
+        showModal: false,
+        largeUrl: '',
     }
     componentDidUpdate(prevProps, prevState) {
         if (prevState.searchQuery !== this.state.searchQuery) {
             this.fetchImages();
         }
+    };
+
+    toggleModal = (largeUrl) => {
+        this.setState(state => ({ showModal: !state.showModal, largeUrl }));
     }
-    
+
     fetchImages = () => {
         const { searchQuery, page } = this.state;
 
@@ -40,11 +47,12 @@ class App extends Component {
         })
     }
     render() {
-        const { articles } = this.state;
+        const { articles, showModal } = this.state;
         return (
             <Layout>
                 <Searchbar onSubmit={this.handleSearchFormSubmit} />
-                {articles.length > 0 && <ImageGallery images={articles}/>}
+                {articles.length > 0 && <ImageGallery images={articles} openModal={this.toggleModal}/>}
+                {showModal && <Modal onClose={this.toggleModal} largeUrl={ this.state.largeUrl}/>}
             </Layout>
         )
     }
