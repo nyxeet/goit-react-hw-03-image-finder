@@ -4,6 +4,7 @@ import Searchbar from './Searchbar'
 import ImageGallery from './ImageGallery'
 import Layout from './Layout'
 import Modal from './Modal'
+import LoadMoreButton from './LoadMoreButton'
 import Loader from "react-loader-spinner";
 import '../styles.css'
 
@@ -21,10 +22,6 @@ class App extends Component {
         if (prevState.searchQuery !== this.state.searchQuery) {
             this.fetchImages();
         }
-        window.scrollTo({
-            top: document.documentElement.scrollHeight,
-            behavior: 'smooth',
-        });
     };
 
     toggleModal = (largeUrl) => {
@@ -74,9 +71,7 @@ class App extends Component {
                 />}
                 
                 {articles.length > 0 && !loading && (
-                    <button type='button' className='Button' onClick={this.fetchImages}>
-                        Load more
-                    </button>
+                    <LoadMoreButton loadMore={this.fetchImages} />
                 )}
             </Layout>
         )
