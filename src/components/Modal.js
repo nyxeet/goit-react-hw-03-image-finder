@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import '../styles.css'
+import React, { Component } from 'react';
+import '../styles.css';
 
 class Modal extends Component {
   componentDidMount() {
@@ -16,13 +16,13 @@ class Modal extends Component {
     }
   };
 
-    render() {
-        return (
-            <div className="Overlay" onClick={() => this.props.onClose()}>
-                <div className="Modal">
-                <img src={this.props.largeUrl} alt='' />
-            </div>
+  render() {
+    return (
+      <div className="Overlay" onClick={() => this.props.onClose()}>
+        <div className="Modal">
+          <img src={this.props.largeUrl} alt="" />
         </div>
+      </div>
     );
   }
 }
