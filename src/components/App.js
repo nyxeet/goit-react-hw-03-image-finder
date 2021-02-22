@@ -17,6 +17,7 @@ class App extends Component {
     showModal: false,
     largeUrl: '',
   };
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.searchQuery !== this.state.searchQuery) {
       this.fetchImages();
@@ -67,7 +68,7 @@ class App extends Component {
           <Loader
             className="Loader"
             type="ThreeDots"
-            color="#00BFFF"
+            color="#3f51b5"
             margin-left={100}
             height={80}
             width={80}
